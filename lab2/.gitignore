@@ -1,0 +1,9 @@
+﻿# Ignore large dataset files but keep sample files
+Task_1_Chest_XRay/data/*.zip
+Task_2_Cardiac_Fusion/data/*.zip
+Task_3_Echo_Analysis/data/*.zip
+Task_1_Chest_XRay/data/COVID/
+Task_1_Chest_XRay/data/NORMAL/
+Task_2_Cardiac_Fusion/data/archive*/
+Task_2_Cardiac_Fusion/data/synthetic_slices*/
+Task_3_Echo_Analysis/data/EchoNet-Dynamic/
