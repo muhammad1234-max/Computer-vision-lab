@@ -1,4 +1,4 @@
-﻿# Task 3: Real-Time Echocardiogram Video Analysis
+# Task 3: Real-Time Echocardiogram Video Analysis
 
 ## Overview
 Ultrasound (echocardiogram) footage of a beating heart is notoriously noisy, murky,
@@ -9,10 +9,10 @@ alongside the corrected feed live.
 ## How to Run the Video Loop
 
 ### Option A: Interactive (recommended — requires a display)
-`ash
+```bash
 cd Task_3_Echo_Analysis
 jupyter notebook realtime_echo.ipynb
-`
+```
 Run the **"Real-Time Processing Loop"** cell. A window will appear showing
 the raw ultrasound on the left and the enhanced stream on the right.
 **Press Q to quit.**
@@ -20,7 +20,7 @@ the raw ultrasound on the left and the enhanced stream on the right.
 ### Option B: Static Preview (no display needed)
 Run the **"Static Frame-by-Frame Preview"** cell instead.
 It processes 4 evenly spaced frames from the video and shows them via matplotlib,
-saving the result to output/static_preview_frames.png.
+saving the result to `output/static_preview_frames.png`.
 
 ## Per-Frame Enhancement Pipeline
 
@@ -36,21 +36,21 @@ Each frame goes through these transformations in sequence:
 | 6 | Power-Law Gamma (γ=0.6) | Suppresses blinding white backscatter noise from the ultrasound probe |
 
 ## Monitoring Array Layout
-`
+```
 +-----------------------+-----------------------+
 |                       |                       |
 |    RAW ULTRASOUND     |  ENHANCED PIPELINE    |
 |   (original feed)     |   (all steps applied) |
 |                       |                       |
 +-----------------------+-----------------------+
-`
+```
 
 ## Dataset
 - Source: Stanford EchoNet-Dynamic Dataset (Kaggle)
 - Link: https://www.kaggle.com/datasets/manojkumarcs28/echonet-dynamic-by-stanford-university
-- Place one short ultrasound clip as data/sample_echo.mp4
+- Place one short ultrasound clip as `data/sample_echo.mp4`
 
-## Outputs (saved to output/)
-- rame_sample_NNN.png              – Screenshots of the monitoring array (every 30 frames)
-- pipeline_screenshot_example.png   – First monitoring array screenshot
-- static_preview_frames.png         – Static 4-frame preview (no display needed)
+## Outputs (saved to `output/`)
+- `frame_sample_NNN.png`              – Screenshots of the monitoring array (every 30 frames)
+- `pipeline_screenshot_example.png`   – First monitoring array screenshot
+- `static_preview_frames.png`         – Static 4-frame preview (no display needed)
