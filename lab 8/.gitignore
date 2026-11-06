@@ -1,0 +1,8 @@
+# Dataset and large cache files
+data/
+*.pt
+*.zip
+*.tar.gz
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
