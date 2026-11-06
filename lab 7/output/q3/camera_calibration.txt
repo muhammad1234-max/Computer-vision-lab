@@ -1,0 +1,16 @@
+CAMERA CALIBRATION PARAMETERS (Lab 07 - Question 3)
+=======================================================
+
+1. INTRINSIC CAMERA MATRIX (K) [3x3]:
+   fx = 3891.7107, fy = 4354.4349
+   cx = 318.2900, cy = 118.5764
+[[3.89171070e+03 0.00000000e+00 3.18290001e+02]
+ [0.00000000e+00 4.35443492e+03 1.18576400e+02]
+ [0.00000000e+00 0.00000000e+00 1.00000000e+00]]
+
+2. DISTORTION COEFFICIENTS [k1, k2, p1, p2, k3]:
+[ 1.71628504e+00 -4.14467519e+02  5.24568458e-02  5.22995897e-02
+ -5.63482347e+00]
+
+Calibrated Image Resolution: 700 x 520
+RMS Re-projection Error: 2.0442 pixels

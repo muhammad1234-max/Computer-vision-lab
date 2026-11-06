@@ -1,0 +1,1231 @@
+
+
+======================================================================
+STAGE: COLMAP Version & Capability Check
+COMMAND: C:\colmap\colmap.bat -h
+======================================================================
+COLMAP 4.2.1 (Commit bd1fcf6 on 2026-09-29 without GPU support, boost hash maps)
+Usage:
+  colmap [command] [options]
+Documentation:
+  https://colmap.github.io/
+Example usage:
+  colmap help [ -h, --help ]
+  colmap gui
+  colmap gui -h [ --help ]
+  colmap automatic_reconstructor -h [ --help ]
+  colmap automatic_reconstructor --image_path IMAGES --workspace_path WORKSPACE
+  colmap feature_extractor --image_path IMAGES --database_path DATABASE
+  colmap exhaustive_matcher --database_path DATABASE
+  colmap mapper --image_path IMAGES --database_path DATABASE --output_path MODEL
+  ...
+Available commands:
+  help
+  version
+  gui
+  automatic_reconstructor
+  bundle_adjuster
+  color_extractor
+  database_cleaner
+  database_creator
+  database_merger
+  advancing_front_mesher
+  delaunay_mesher
+  exhaustive_matcher
+  feature_extractor
+  feature_importer
+  geometric_verifier
+  global_mapper
+  guided_geometric_verifier
+  hierarchical_mapper
+  image_deleter
+  image_filterer
+  image_rectifier
+  image_registrator
+  image_undistorter
+  image_undistorter_standalone
+  mapper
+  matches_importer
+  mesh_simplifier
+  mesh_texturer
+  model_aligner
+  model_analyzer
+  model_clusterer
+  model_comparer
+  model_converter
+  model_cropper
+  model_merger
+  model_orientation_aligner
+  model_splitter
+  model_transformer
+  patch_match_stereo
+  point_filtering
+  point_triangulator
+  pose_prior_mapper
+  poisson_mesher
+  project_generator
+  rig_configurator
+  rotation_averager
+  sequential_matcher
+  spatial_matcher
+  stereo_fusion
+  transitive_matcher
+  view_graph_calibrator
+  vocab_tree_builder
+  vocab_tree_matcher
+  vocab_tree_retriever
+
+
+
+======================================================================
+STAGE: Inspect feature_extractor Options
+COMMAND: C:\colmap\colmap.bat feature_extractor -h
+======================================================================
+I20261107 01:19:20.839794 10952 option_manager.cc:1319] COLMAP 4.2.1 (Commit bd1fcf6 on 2026-09-29 without GPU support, boost hash maps)
+I20261107 01:19:20.841099 10952 option_manager.cc:1321] Options can either be specified via command-line or by defining them in a .ini project file passed to `--project_path`.
+  -h [ --help ] 
+  --project_path arg
+  --default_random_seed arg (=0)
+  --log_target arg (=stderr_and_file)   {stderr, stdout, file, stderr_and_file}
+  --log_path arg
+  --log_level arg (=0)
+  --log_severity arg (=0)               0:INFO, 1:WARNING, 2:ERROR, 3:FATAL
+  --log_color arg (=1)
+  --database_path arg
+  --image_path arg
+  --camera_mode arg (=-1)
+  --image_list_path arg
+  --descriptor_normalization arg (=l1_root)
+                                        {'l1_root', 'l2'}
+  --ImageReader.mask_path arg
+  --ImageReader.camera_model arg (=SIMPLE_RADIAL)
+  --ImageReader.single_camera arg (=0)
+  --ImageReader.single_camera_per_folder arg (=0)
+  --ImageReader.single_camera_per_image arg (=0)
+  --ImageReader.existing_camera_id arg (=-1)
+  --ImageReader.camera_params arg
+  --ImageReader.default_focal_length_factor arg (=1.2)
+  --ImageReader.camera_mask_path arg
+  --FeatureExtraction.type arg (=SIFT)
+  --FeatureExtraction.num_threads arg (=-1)
+  --FeatureExtraction.use_gpu arg (=1)
+  --FeatureExtraction.gpu_index arg (=-1)
+  --FeatureExtraction.max_image_size arg (=-1)
+  --SiftExtraction.max_num_features arg (=8192)
+  --SiftExtraction.first_octave arg (=-1)
+  --SiftExtraction.num_octaves arg (=4)
+  --SiftExtraction.octave_resolution arg (=3)
+  --SiftExtraction.peak_threshold arg (=0.00667)
+  --SiftExtraction.edge_threshold arg (=10)
+  --SiftExtraction.estimate_affine_shape arg (=0)
+  --SiftExtraction.max_num_orientations arg (=2)
+  --SiftExtraction.upright arg (=0)
+  --SiftExtraction.domain_size_pooling arg (=0)
+  --SiftExtraction.dsp_min_scale arg (=0.167)
+  --SiftExtraction.dsp_max_scale arg (=3)
+  --SiftExtraction.dsp_num_scales arg (=10)
+  --AlikedExtraction.max_num_features arg (=2048)
+  --AlikedExtraction.min_score arg (=0.2)
+  --AlikedExtraction.n16rot_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/aliked-n16rot.onnx;aliked-n16rot.onnx;39c423d0a6f03d39ec89d3d1d61853765c2fb6a8b8381376c703e5758778a547)
+  --AlikedExtraction.n32_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/aliked-n32.onnx;aliked-n32.onnx;a077728a02d2de1a775c66df6de8cfeb7c6b51ca57572c64c680131c988c8b3c)
+  --LomaExtraction.max_num_features arg (=2048)
+  --LomaExtraction.min_score arg (=0)
+  --LomaExtraction.use_bf16 arg (=0)
+  --LomaExtraction.use_fast_resize arg (=0)
+  --LomaExtraction.detector_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_detector.onnx;loma_detector.onnx;b6af99c5e730034ac9b675d1ebe05d0679af4569a3c26f10a6a50f91e02dc512)
+  --LomaExtraction.descriptor_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_descriptor_dedode_g.onnx;loma_descriptor_dedode_g.onnx;5a7b9eaf7425d4513c5d7feae86080bae7ed3aceae7fb1b9f059d0752e2ad564)
+  --LomaExtraction.descriptor_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_descriptor_dedode_g_bf16.onnx;loma_descriptor_dedode_g_bf16.onnx;679b3ead5385b2bf0424548ed027edd48f96eb8b7cddcb42344e899cf0d97e7b)
+  --LomaExtraction.descriptor_b128_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_descriptor_dedode_b.onnx;loma_descriptor_dedode_b.onnx;82660a364299013618fe649092ebc4f617559f6a77e1ab5a3412be62a47ddc2d)
+
+
+======================================================================
+STAGE: 1. Feature Extraction (SIFT)
+COMMAND: C:\colmap\colmap.bat feature_extractor --database_path output/q4\database.db --image_path input/colmap_images --ImageReader.camera_model PINHOLE --ImageReader.single_camera 1 --FeatureExtraction.use_gpu 0
+======================================================================
+W20261107 01:19:21.003500 10200 feature_extraction.cc:445] Your current options use the maximum number of threads on the machine to extract features. Extracting SIFT features on the CPU can consume a lot of RAM per thread for large images. Consider reducing the maximum image size and/or the first octave or manually limit the number of extraction threads. Ignore this warning, if your machine has sufficient memory for the current settings.
+I20261107 01:19:21.006328 13272 feature_extraction.cc:498] === Feature extraction ===
+I20261107 01:19:21.007400 13004 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:19:21.007595 14656 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:19:21.007656 14052 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:19:21.007900 14652 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:19:21.007983 12404 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:19:21.008202 12788 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:19:21.008394  6020 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:19:21.008486 14852 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:19:22.444323 11272 feature_extraction.cc:270] Processed file [1/8]
+I20261107 01:19:22.444555 11272 feature_extraction.cc:273]   Name:            frame_04.jpg
+I20261107 01:19:22.444584 11272 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:19:22.444604 11272 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:19:22.444625 11272 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:19:22.444660 11272 feature_extraction.cc:294]   Features:        2056 (SIFT)
+I20261107 01:19:22.450351 11272 feature_extraction.cc:270] Processed file [2/8]
+I20261107 01:19:22.450572 11272 feature_extraction.cc:273]   Name:            frame_01.jpg
+I20261107 01:19:22.450640 11272 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:19:22.450680 11272 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:19:22.450721 11272 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:19:22.450797 11272 feature_extraction.cc:294]   Features:        2022 (SIFT)
+I20261107 01:19:22.484388 11272 feature_extraction.cc:270] Processed file [3/8]
+I20261107 01:19:22.484490 11272 feature_extraction.cc:273]   Name:            frame_03.jpg
+I20261107 01:19:22.484527 11272 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:19:22.484560 11272 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:19:22.484587 11272 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:19:22.484639 11272 feature_extraction.cc:294]   Features:        2146 (SIFT)
+I20261107 01:19:22.504174 11272 feature_extraction.cc:270] Processed file [4/8]
+I20261107 01:19:22.504274 11272 feature_extraction.cc:273]   Name:            frame_05.jpg
+I20261107 01:19:22.504300 11272 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:19:22.504321 11272 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:19:22.504342 11272 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:19:22.504371 11272 feature_extraction.cc:294]   Features:        2002 (SIFT)
+I20261107 01:19:22.544935 11272 feature_extraction.cc:270] Processed file [5/8]
+I20261107 01:19:22.545200 11272 feature_extraction.cc:273]   Name:            frame_02.jpg
+I20261107 01:19:22.545232 11272 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:19:22.545251 11272 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:19:22.545270 11272 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:19:22.545298 11272 feature_extraction.cc:294]   Features:        2020 (SIFT)
+I20261107 01:19:22.560791 11272 feature_extraction.cc:270] Processed file [6/8]
+I20261107 01:19:22.560886 11272 feature_extraction.cc:273]   Name:            frame_08.jpg
+I20261107 01:19:22.560915 11272 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:19:22.560934 11272 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:19:22.560963 11272 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:19:22.560997 11272 feature_extraction.cc:294]   Features:        2062 (SIFT)
+I20261107 01:19:22.617719 11272 feature_extraction.cc:270] Processed file [7/8]
+I20261107 01:19:22.617814 11272 feature_extraction.cc:273]   Name:            frame_07.jpg
+I20261107 01:19:22.617834 11272 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:19:22.618024 11272 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:19:22.618043 11272 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:19:22.618062 11272 feature_extraction.cc:294]   Features:        2000 (SIFT)
+I20261107 01:19:22.627869 11272 feature_extraction.cc:270] Processed file [8/8]
+I20261107 01:19:22.628009 11272 feature_extraction.cc:273]   Name:            frame_06.jpg
+I20261107 01:19:22.628040 11272 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:19:22.628059 11272 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:19:22.628089 11272 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:19:22.628146 11272 feature_extraction.cc:294]   Features:        2086 (SIFT)
+I20261107 01:19:22.642790 13272 timer.cc:90] Elapsed time: 0.027 [minutes]
+
+
+======================================================================
+STAGE: Inspect exhaustive_matcher Options
+COMMAND: C:\colmap\colmap.bat exhaustive_matcher -h
+======================================================================
+I20261107 01:19:22.816637 12712 option_manager.cc:1319] COLMAP 4.2.1 (Commit bd1fcf6 on 2026-09-29 without GPU support, boost hash maps)
+I20261107 01:19:22.817972 12712 option_manager.cc:1321] Options can either be specified via command-line or by defining them in a .ini project file passed to `--project_path`.
+  -h [ --help ] 
+  --project_path arg
+  --default_random_seed arg (=0)
+  --log_target arg (=stderr_and_file)   {stderr, stdout, file, stderr_and_file}
+  --log_path arg
+  --log_level arg (=0)
+  --log_severity arg (=0)               0:INFO, 1:WARNING, 2:ERROR, 3:FATAL
+  --log_color arg (=1)
+  --database_path arg
+  --FeatureMatching.type arg (=SIFT_BRUTEFORCE)
+  --FeatureMatching.num_threads arg (=-1)
+  --FeatureMatching.use_gpu arg (=1)
+  --FeatureMatching.gpu_index arg (=-1)
+  --FeatureMatching.guided_matching arg (=0)
+  --FeatureMatching.skip_geometric_verification arg (=0)
+  --FeatureMatching.rig_verification arg (=0)
+  --FeatureMatching.skip_image_pairs_in_same_frame arg (=0)
+  --FeatureMatching.max_num_matches arg (=32768)
+  --SiftMatching.max_ratio arg (=0.8)
+  --SiftMatching.max_distance arg (=0.7)
+  --SiftMatching.cross_check arg (=1)
+  --SiftMatching.cpu_brute_force_matcher arg (=0)
+  --SiftMatching.lightglue_min_score arg (=0.1)
+  --SiftMatching.lightglue_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/sift-lightglue.onnx;sift-lightglue.onnx;e0500228472b43f92b3d36881a09b3310d3b058b56187b246cc7b9ab6429096e)
+  --AlikedMatching.brute_force_min_cossim arg (=0.85)
+  --AlikedMatching.brute_force_max_ratio arg (=1)
+  --AlikedMatching.brute_force_cross_check arg (=1)
+  --AlikedMatching.bruteforce_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/bruteforce-matcher.onnx;bruteforce-matcher.onnx;3c1282f96d83f5ffc861a873298d08bbe5219f59af59223f5ceab5c41a182a47)
+  --AlikedMatching.lightglue_min_score arg (=0.1)
+  --AlikedMatching.lightglue_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/aliked-lightglue.onnx;aliked-lightglue.onnx;b9a5de7204648b18a8cf5dcac819f9d30de1a5961ef03756803c8b86c2dceb8d)
+  --LomaMatching.min_score arg (=0.1)
+  --LomaMatching.use_bf16 arg (=0)
+  --LomaMatching.b_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_B.onnx;loma_matcher_B.onnx;ba5a2773b29cace19f1240e14e5a080cca3eaf9f69a7adb829a1d470557001c7)
+  --LomaMatching.b_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_B_bf16.onnx;loma_matcher_B_bf16.onnx;e61751cdbac6f305efa0d5b2ddc8f8c8e095b1b7196bfac3ed8d4e29b007f625)
+  --LomaMatching.b128_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_B128.onnx;loma_matcher_B128.onnx;e71ad490d13713374433a7ef99a7b4f4877d09338e40f347b7e64cc90150ee16)
+  --LomaMatching.b128_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_B128_bf16.onnx;loma_matcher_B128_bf16.onnx;7dec0563c0955400a7bef18ba0c62a70772c9c5c3bf2734372c32de5f1876c32)
+  --LomaMatching.r_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_R.onnx;loma_matcher_R.onnx;6c55247068568861d983b6005d9c401a4c62b8f8ea75d1a6925f13b0211407b5)
+  --LomaMatching.r_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_R_bf16.onnx;loma_matcher_R_bf16.onnx;172d214a91e5c12126acc7c7c66804c22ec47b9a8fc572b10ba9711714386e43)
+  --LomaMatching.l_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_L.onnx;loma_matcher_L.onnx;918da5427f37c3d9e05264a58a4d05729f87d459c3d5d69add7ce72eeacea66d)
+  --LomaMatching.l_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_L_bf16.onnx;loma_matcher_L_bf16.onnx;bab859300bbec88af30705021356f526a374d48ac7917b135d979686ade0ed23)
+  --LomaMatching.g_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_G.onnx;loma_matcher_G.onnx;62134cde779ed1031982c13c2c1952ed14856d715e97072364821a91f6276cf9)
+  --LomaMatching.g_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_G_bf16.onnx;loma_matcher_G_bf16.onnx;2d21420e1e0e3bcd085cd9a7d33be1f990e820d6b13ffbbddc73d9d04713b6c6)
+  --LomaMatching.brute_force_min_cossim arg (=0.85)
+  --LomaMatching.brute_force_max_ratio arg (=1)
+  --LomaMatching.brute_force_cross_check arg (=1)
+  --LomaMatching.brute_force_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/bruteforce-matcher.onnx;bruteforce-matcher.onnx;3c1282f96d83f5ffc861a873298d08bbe5219f59af59223f5ceab5c41a182a47)
+  --TwoViewGeometry.min_num_inliers arg (=15)
+  --TwoViewGeometry.multiple_models arg (=0)
+  --TwoViewGeometry.compute_relative_pose arg (=0)
+  --TwoViewGeometry.detect_watermark arg (=1)
+  --TwoViewGeometry.multiple_ignore_watermark arg (=1)
+  --TwoViewGeometry.watermark_detection_max_error arg (=4)
+  --TwoViewGeometry.filter_stationary_matches arg (=0)
+  --TwoViewGeometry.stationary_matches_max_error arg (=4)
+  --TwoViewGeometry.use_degensac arg (=0)
+  --TwoViewGeometry.use_sampson_refinement arg (=1)
+  --TwoViewGeometry.max_error arg (=4)
+  --TwoViewGeometry.confidence arg (=0.999)
+  --TwoViewGeometry.max_num_trials arg (=10000)
+  --TwoViewGeometry.min_inlier_ratio arg (=0)
+  --TwoViewGeometry.random_seed arg (=-1)
+  --ExhaustiveMatching.block_size arg (=50)
+
+
+======================================================================
+STAGE: 2. Feature Matching (Exhaustive)
+COMMAND: C:\colmap\colmap.bat exhaustive_matcher --database_path output/q4\database.db --FeatureMatching.use_gpu 0
+======================================================================
+I20261107 01:19:22.966389  6440 feature_matching.cc:196] === Feature matching & geometric verification ===
+I20261107 01:19:22.968513  4804 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:19:22.968516 13172 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:19:22.968537  6376 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:19:22.968647 14452 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:19:22.968548  1148 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:19:22.968717  5132 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:19:22.968921 15884 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:19:22.969118  1636 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:19:22.969557  6440 pairing.cc:181] Generating exhaustive image pairs...
+I20261107 01:19:22.969605  6440 pairing.cc:214] Processing block [1/1, 1/1]
+I20261107 01:19:24.687804  6440 feature_matching.cc:218] in 1.718s
+I20261107 01:19:24.687866  6440 timer.cc:90] Elapsed time: 0.029 [minutes]
+
+
+======================================================================
+STAGE: 3. Sparse Reconstruction & Camera Pose Estimation
+COMMAND: C:\colmap\colmap.bat mapper --database_path output/q4\database.db --image_path input/colmap_images --output_path output/q4\sparse
+======================================================================
+I20261107 01:19:24.929147  6384 incremental_pipeline.cc:353] Loading database
+I20261107 01:19:24.930326  6384 database_cache.cc:82] Loading rigs...
+I20261107 01:19:24.930402  6384 database_cache.cc:92]  1 in 0.000s
+I20261107 01:19:24.930423  6384 database_cache.cc:100] Loading cameras...
+I20261107 01:19:24.930457  6384 database_cache.cc:118]  1 in 0.000s
+I20261107 01:19:24.930474  6384 database_cache.cc:126] Loading frames...
+I20261107 01:19:24.930562  6384 database_cache.cc:136]  8 in 0.000s
+I20261107 01:19:24.930591  6384 database_cache.cc:144] Loading matches...
+I20261107 01:19:24.930825  6384 database_cache.cc:163]  28 in 0.000s
+I20261107 01:19:24.930844  6384 database_cache.cc:171] Loading images...
+I20261107 01:19:24.932056  6384 database_cache.cc:268]  8 in 0.001s (connected 8, loaded 8)
+I20261107 01:19:24.932096  6384 database_cache.cc:282] Loading pose priors...
+I20261107 01:19:24.932129  6384 database_cache.cc:290]  0 in 0.000s
+I20261107 01:19:24.932151  6384 database_cache.cc:298] Building correspondence graph...
+I20261107 01:19:24.935578  6384 database_cache.cc:327]  in 0.003s (ignored 0)
+I20261107 01:19:24.935670  6384 timer.cc:90] Elapsed time: 0.000 [minutes]
+I20261107 01:19:24.935998  6384 incremental_pipeline.cc:465] Finding good initial image pair
+I20261107 01:19:24.997333  6384 incremental_pipeline.cc:492] Registering initial image pair #8 and #1
+I20261107 01:19:25.000149  6384 incremental_pipeline.cc:510] Global bundle adjustment
+I20261107 01:19:25.072142  6384 incremental_pipeline.cc:620] Registering image #3 (num_reg_frames=2)
+I20261107 01:19:25.072196  6384 incremental_pipeline.cc:623] => Image sees 206 / 907 points
+I20261107 01:19:25.139383  6384 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:19:25.152475  6384 incremental_pipeline.cc:620] Registering image #5 (num_reg_frames=3)
+I20261107 01:19:25.152562  6384 incremental_pipeline.cc:623] => Image sees 354 / 803 points
+I20261107 01:19:25.210768  6384 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:19:25.320227  6384 incremental_pipeline.cc:620] Registering image #2 (num_reg_frames=4)
+I20261107 01:19:25.320295  6384 incremental_pipeline.cc:623] => Image sees 437 / 739 points
+I20261107 01:19:25.372639  6384 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:19:25.429823  6384 incremental_pipeline.cc:620] Registering image #4 (num_reg_frames=5)
+I20261107 01:19:25.429983  6384 incremental_pipeline.cc:623] => Image sees 494 / 896 points
+I20261107 01:19:25.488232  6384 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:19:25.539736  6384 incremental_pipeline.cc:620] Registering image #6 (num_reg_frames=6)
+I20261107 01:19:25.539797  6384 incremental_pipeline.cc:623] => Image sees 444 / 732 points
+I20261107 01:19:25.594853  6384 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:19:25.660582  6384 incremental_pipeline.cc:620] Registering image #7 (num_reg_frames=7)
+I20261107 01:19:25.660673  6384 incremental_pipeline.cc:623] => Image sees 539 / 796 points
+I20261107 01:19:25.777692  6384 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:19:25.861252  6384 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:19:25.882665  6384 incremental_pipeline.cc:826] Keeping successful reconstruction
+I20261107 01:19:25.893292  6384 timer.cc:90] Elapsed time: 0.016 [minutes]
+
+
+======================================================================
+STAGE: Export Sparse Point Cloud (.ply)
+COMMAND: C:\colmap\colmap.bat model_converter --input_path output/q4\sparse\0 --output_path output/q4\sparse_point_cloud.ply --output_type PLY
+======================================================================
+
+
+======================================================================
+STAGE: 4a. Image Undistortion for Dense MVS
+COMMAND: C:\colmap\colmap.bat image_undistorter --image_path input/colmap_images --input_path output/q4\sparse\0 --output_path output/q4\dense
+======================================================================
+I20261107 01:19:26.250339 13664 image.cc:376] === Reading reconstruction ===
+I20261107 01:19:26.255343 13664 image.cc:379] => Reconstruction with 8 images and 988 points
+I20261107 01:19:26.255388 13664 undistorters.cc:166] === Image undistortion ===
+I20261107 01:19:26.257383 13664 undistorters.cc:208] Undistorting image [1/8]
+I20261107 01:19:26.257436 14572 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_04.jpg"
+I20261107 01:19:26.257623 10244 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_01.jpg"
+I20261107 01:19:26.257698  3448 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_03.jpg"
+I20261107 01:19:26.257776  7920 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_05.jpg"
+I20261107 01:19:26.257853  5624 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_02.jpg"
+I20261107 01:19:26.257963  5956 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_08.jpg"
+I20261107 01:19:26.258084  4168 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_07.jpg"
+I20261107 01:19:26.258328 11180 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_06.jpg"
+I20261107 01:19:26.265368 13664 undistorters.cc:208] Undistorting image [2/8]
+I20261107 01:19:26.265454 13664 undistorters.cc:208] Undistorting image [3/8]
+I20261107 01:19:26.265599 13664 undistorters.cc:208] Undistorting image [4/8]
+I20261107 01:19:26.265658 13664 undistorters.cc:208] Undistorting image [5/8]
+I20261107 01:19:26.265847 13664 undistorters.cc:208] Undistorting image [6/8]
+I20261107 01:19:26.266661 13664 undistorters.cc:208] Undistorting image [7/8]
+I20261107 01:19:26.266753 13664 undistorters.cc:208] Undistorting image [8/8]
+I20261107 01:19:26.266946 13664 undistorters.cc:222] Writing reconstruction...
+I20261107 01:19:26.276764 13664 undistorters.cc:227] Writing configuration...
+I20261107 01:19:26.278715 13664 undistorters.cc:231] Writing scripts...
+I20261107 01:19:26.282024 13664 timer.cc:90] Elapsed time: 0.000 [minutes]
+
+
+======================================================================
+STAGE: 4b. PatchMatch Stereo Depth Estimation
+COMMAND: C:\colmap\colmap.bat patch_match_stereo --workspace_path output/q4\dense --PatchMatchStereo.geom_consistency true
+======================================================================
+
+[Q4] ERROR: Stage '4b. PatchMatch Stereo Depth Estimation' failed with exit code 3221226505.
+
+
+======================================================================
+STAGE: 5. Surface Meshing (Poisson)
+COMMAND: C:\colmap\colmap.bat poisson_mesher --input_path output/q4\sparse_point_cloud.ply --output_path output/q4\reconstructed_mesh.ply
+======================================================================
+W20261107 01:19:28.831680 14188 poisson_meshing.cc:162] PoissonRecon failed with exception: [EXCEPTION] ..\src\thirdparty\PoissonRecon\PoissonRecon.cpp (Line 656)
+            RunPoissonRecon
+            Ply file does not contain normals
+
+[Q4] ERROR: Stage '5. Surface Meshing (Poisson)' failed with exit code 3221226505.
+
+
+======================================================================
+STAGE: 5 (Fallback). Surface Meshing (Delaunay sparse)
+COMMAND: C:\colmap\colmap.bat delaunay_mesher --input_path output/q4\sparse\0 --input_type sparse --output_path output/q4\reconstructed_mesh.ply
+======================================================================
+I20261107 01:19:31.151936 12988 delaunay_meshing.cc:632] Triangulating points...
+I20261107 01:19:31.158121 12988 delaunay_meshing.cc:330] Triangulation has 696 using 988 points.
+I20261107 01:19:31.158186 12988 delaunay_meshing.cc:637] Initializing ray tracer...
+I20261107 01:19:31.159825 12988 delaunay_meshing.cc:646] Initializing graph optimization...
+I20261107 01:19:31.160453 12988 delaunay_meshing.cc:791] Integrating image [1/8]
+I20261107 01:19:31.173001 12988 delaunay_meshing.cc:817]  in 0.013s
+I20261107 01:19:31.173193 12988 delaunay_meshing.cc:791] Integrating image [2/8]
+I20261107 01:19:31.173366 12988 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:19:31.173470 12988 delaunay_meshing.cc:791] Integrating image [3/8]
+I20261107 01:19:31.173654 12988 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:19:31.174073 12988 delaunay_meshing.cc:791] Integrating image [4/8]
+I20261107 01:19:31.174308 12988 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:19:31.174439 12988 delaunay_meshing.cc:791] Integrating image [5/8]
+I20261107 01:19:31.175112 12988 delaunay_meshing.cc:817]  in 0.001s
+I20261107 01:19:31.175262 12988 delaunay_meshing.cc:791] Integrating image [6/8]
+I20261107 01:19:31.175655 12988 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:19:31.175744 12988 delaunay_meshing.cc:791] Integrating image [7/8]
+I20261107 01:19:31.175819 12988 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:19:31.175896 12988 delaunay_meshing.cc:791] Integrating image [8/8]
+I20261107 01:19:31.178195 12988 delaunay_meshing.cc:817]  in 0.002s
+I20261107 01:19:31.178314 12988 delaunay_meshing.cc:822] Setting up optimization...
+I20261107 01:19:31.183318 12988 delaunay_meshing.cc:870] Running graph-cut optimization...
+I20261107 01:19:31.186354 12988 delaunay_meshing.cc:873] Extracting surface as min-cut...
+I20261107 01:19:31.186861 12988 delaunay_meshing.cc:920] Creating surface mesh model...
+I20261107 01:19:31.189597 12988 delaunay_meshing.cc:971] Writing surface mesh...
+I20261107 01:19:31.192757 12988 timer.cc:86] Elapsed time: 0.04596 [seconds]
+
+
+======================================================================
+STAGE: COLMAP Version & Capability Check
+COMMAND: C:\colmap\colmap.bat -h
+======================================================================
+COLMAP 4.2.1 (Commit bd1fcf6 on 2026-09-29 without GPU support, boost hash maps)
+Usage:
+  colmap [command] [options]
+Documentation:
+  https://colmap.github.io/
+Example usage:
+  colmap help [ -h, --help ]
+  colmap gui
+  colmap gui -h [ --help ]
+  colmap automatic_reconstructor -h [ --help ]
+  colmap automatic_reconstructor --image_path IMAGES --workspace_path WORKSPACE
+  colmap feature_extractor --image_path IMAGES --database_path DATABASE
+  colmap exhaustive_matcher --database_path DATABASE
+  colmap mapper --image_path IMAGES --database_path DATABASE --output_path MODEL
+  ...
+Available commands:
+  help
+  version
+  gui
+  automatic_reconstructor
+  bundle_adjuster
+  color_extractor
+  database_cleaner
+  database_creator
+  database_merger
+  advancing_front_mesher
+  delaunay_mesher
+  exhaustive_matcher
+  feature_extractor
+  feature_importer
+  geometric_verifier
+  global_mapper
+  guided_geometric_verifier
+  hierarchical_mapper
+  image_deleter
+  image_filterer
+  image_rectifier
+  image_registrator
+  image_undistorter
+  image_undistorter_standalone
+  mapper
+  matches_importer
+  mesh_simplifier
+  mesh_texturer
+  model_aligner
+  model_analyzer
+  model_clusterer
+  model_comparer
+  model_converter
+  model_cropper
+  model_merger
+  model_orientation_aligner
+  model_splitter
+  model_transformer
+  patch_match_stereo
+  point_filtering
+  point_triangulator
+  pose_prior_mapper
+  poisson_mesher
+  project_generator
+  rig_configurator
+  rotation_averager
+  sequential_matcher
+  spatial_matcher
+  stereo_fusion
+  transitive_matcher
+  view_graph_calibrator
+  vocab_tree_builder
+  vocab_tree_matcher
+  vocab_tree_retriever
+
+
+
+======================================================================
+STAGE: Inspect feature_extractor Options
+COMMAND: C:\colmap\colmap.bat feature_extractor -h
+======================================================================
+I20261107 01:20:49.828160 13580 option_manager.cc:1319] COLMAP 4.2.1 (Commit bd1fcf6 on 2026-09-29 without GPU support, boost hash maps)
+I20261107 01:20:49.829519 13580 option_manager.cc:1321] Options can either be specified via command-line or by defining them in a .ini project file passed to `--project_path`.
+  -h [ --help ] 
+  --project_path arg
+  --default_random_seed arg (=0)
+  --log_target arg (=stderr_and_file)   {stderr, stdout, file, stderr_and_file}
+  --log_path arg
+  --log_level arg (=0)
+  --log_severity arg (=0)               0:INFO, 1:WARNING, 2:ERROR, 3:FATAL
+  --log_color arg (=1)
+  --database_path arg
+  --image_path arg
+  --camera_mode arg (=-1)
+  --image_list_path arg
+  --descriptor_normalization arg (=l1_root)
+                                        {'l1_root', 'l2'}
+  --ImageReader.mask_path arg
+  --ImageReader.camera_model arg (=SIMPLE_RADIAL)
+  --ImageReader.single_camera arg (=0)
+  --ImageReader.single_camera_per_folder arg (=0)
+  --ImageReader.single_camera_per_image arg (=0)
+  --ImageReader.existing_camera_id arg (=-1)
+  --ImageReader.camera_params arg
+  --ImageReader.default_focal_length_factor arg (=1.2)
+  --ImageReader.camera_mask_path arg
+  --FeatureExtraction.type arg (=SIFT)
+  --FeatureExtraction.num_threads arg (=-1)
+  --FeatureExtraction.use_gpu arg (=1)
+  --FeatureExtraction.gpu_index arg (=-1)
+  --FeatureExtraction.max_image_size arg (=-1)
+  --SiftExtraction.max_num_features arg (=8192)
+  --SiftExtraction.first_octave arg (=-1)
+  --SiftExtraction.num_octaves arg (=4)
+  --SiftExtraction.octave_resolution arg (=3)
+  --SiftExtraction.peak_threshold arg (=0.00667)
+  --SiftExtraction.edge_threshold arg (=10)
+  --SiftExtraction.estimate_affine_shape arg (=0)
+  --SiftExtraction.max_num_orientations arg (=2)
+  --SiftExtraction.upright arg (=0)
+  --SiftExtraction.domain_size_pooling arg (=0)
+  --SiftExtraction.dsp_min_scale arg (=0.167)
+  --SiftExtraction.dsp_max_scale arg (=3)
+  --SiftExtraction.dsp_num_scales arg (=10)
+  --AlikedExtraction.max_num_features arg (=2048)
+  --AlikedExtraction.min_score arg (=0.2)
+  --AlikedExtraction.n16rot_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/aliked-n16rot.onnx;aliked-n16rot.onnx;39c423d0a6f03d39ec89d3d1d61853765c2fb6a8b8381376c703e5758778a547)
+  --AlikedExtraction.n32_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/aliked-n32.onnx;aliked-n32.onnx;a077728a02d2de1a775c66df6de8cfeb7c6b51ca57572c64c680131c988c8b3c)
+  --LomaExtraction.max_num_features arg (=2048)
+  --LomaExtraction.min_score arg (=0)
+  --LomaExtraction.use_bf16 arg (=0)
+  --LomaExtraction.use_fast_resize arg (=0)
+  --LomaExtraction.detector_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_detector.onnx;loma_detector.onnx;b6af99c5e730034ac9b675d1ebe05d0679af4569a3c26f10a6a50f91e02dc512)
+  --LomaExtraction.descriptor_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_descriptor_dedode_g.onnx;loma_descriptor_dedode_g.onnx;5a7b9eaf7425d4513c5d7feae86080bae7ed3aceae7fb1b9f059d0752e2ad564)
+  --LomaExtraction.descriptor_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_descriptor_dedode_g_bf16.onnx;loma_descriptor_dedode_g_bf16.onnx;679b3ead5385b2bf0424548ed027edd48f96eb8b7cddcb42344e899cf0d97e7b)
+  --LomaExtraction.descriptor_b128_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_descriptor_dedode_b.onnx;loma_descriptor_dedode_b.onnx;82660a364299013618fe649092ebc4f617559f6a77e1ab5a3412be62a47ddc2d)
+
+
+======================================================================
+STAGE: 1. Feature Extraction (SIFT)
+COMMAND: C:\colmap\colmap.bat feature_extractor --database_path output/q4\database.db --image_path input/colmap_images --ImageReader.camera_model PINHOLE --ImageReader.single_camera 1 --FeatureExtraction.use_gpu 0
+======================================================================
+W20261107 01:20:49.979755 11688 feature_extraction.cc:445] Your current options use the maximum number of threads on the machine to extract features. Extracting SIFT features on the CPU can consume a lot of RAM per thread for large images. Consider reducing the maximum image size and/or the first octave or manually limit the number of extraction threads. Ignore this warning, if your machine has sufficient memory for the current settings.
+I20261107 01:20:49.981554  4852 feature_extraction.cc:498] === Feature extraction ===
+I20261107 01:20:49.983005 11464 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:20:49.983110  6156 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:20:49.983240  4260 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:20:49.983342  4832 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:20:49.983432  4000 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:20:49.983504  4584 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:20:49.983622 10320 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:20:49.983691  2960 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:20:49.983942  8956 feature_extraction.cc:270] Processed file [1/8]
+I20261107 01:20:49.983983  8956 feature_extraction.cc:273]   Name:            frame_01.jpg
+W20261107 01:20:49.984005  8956 feature_extraction.cc:277] frame_01.jpg IMAGE_EXISTS: Features for image were already extracted.
+I20261107 01:20:49.984067  8956 feature_extraction.cc:270] Processed file [2/8]
+I20261107 01:20:49.984090  8956 feature_extraction.cc:273]   Name:            frame_02.jpg
+W20261107 01:20:49.984108  8956 feature_extraction.cc:277] frame_02.jpg IMAGE_EXISTS: Features for image were already extracted.
+I20261107 01:20:49.984148  8956 feature_extraction.cc:270] Processed file [3/8]
+I20261107 01:20:49.984174  8956 feature_extraction.cc:273]   Name:            frame_04.jpg
+W20261107 01:20:49.984196  8956 feature_extraction.cc:277] frame_04.jpg IMAGE_EXISTS: Features for image were already extracted.
+I20261107 01:20:49.984248  8956 feature_extraction.cc:270] Processed file [4/8]
+I20261107 01:20:49.984289  8956 feature_extraction.cc:273]   Name:            frame_03.jpg
+W20261107 01:20:49.984314  8956 feature_extraction.cc:277] frame_03.jpg IMAGE_EXISTS: Features for image were already extracted.
+I20261107 01:20:49.984361  8956 feature_extraction.cc:270] Processed file [5/8]
+I20261107 01:20:49.984384  8956 feature_extraction.cc:273]   Name:            frame_05.jpg
+W20261107 01:20:49.984442  8956 feature_extraction.cc:277] frame_05.jpg IMAGE_EXISTS: Features for image were already extracted.
+I20261107 01:20:49.984544  8956 feature_extraction.cc:270] Processed file [6/8]
+I20261107 01:20:49.984579  8956 feature_extraction.cc:273]   Name:            frame_06.jpg
+W20261107 01:20:49.984613  8956 feature_extraction.cc:277] frame_06.jpg IMAGE_EXISTS: Features for image were already extracted.
+I20261107 01:20:49.984674  8956 feature_extraction.cc:270] Processed file [7/8]
+I20261107 01:20:49.984699  8956 feature_extraction.cc:273]   Name:            frame_07.jpg
+W20261107 01:20:49.984729  8956 feature_extraction.cc:277] frame_07.jpg IMAGE_EXISTS: Features for image were already extracted.
+I20261107 01:20:49.984785  8956 feature_extraction.cc:270] Processed file [8/8]
+I20261107 01:20:49.984811  8956 feature_extraction.cc:273]   Name:            frame_08.jpg
+W20261107 01:20:49.984830  8956 feature_extraction.cc:277] frame_08.jpg IMAGE_EXISTS: Features for image were already extracted.
+I20261107 01:20:49.985811  4852 timer.cc:90] Elapsed time: 0.000 [minutes]
+
+
+======================================================================
+STAGE: Inspect exhaustive_matcher Options
+COMMAND: C:\colmap\colmap.bat exhaustive_matcher -h
+======================================================================
+I20261107 01:20:50.237166  4928 option_manager.cc:1319] COLMAP 4.2.1 (Commit bd1fcf6 on 2026-09-29 without GPU support, boost hash maps)
+I20261107 01:20:50.238480  4928 option_manager.cc:1321] Options can either be specified via command-line or by defining them in a .ini project file passed to `--project_path`.
+  -h [ --help ] 
+  --project_path arg
+  --default_random_seed arg (=0)
+  --log_target arg (=stderr_and_file)   {stderr, stdout, file, stderr_and_file}
+  --log_path arg
+  --log_level arg (=0)
+  --log_severity arg (=0)               0:INFO, 1:WARNING, 2:ERROR, 3:FATAL
+  --log_color arg (=1)
+  --database_path arg
+  --FeatureMatching.type arg (=SIFT_BRUTEFORCE)
+  --FeatureMatching.num_threads arg (=-1)
+  --FeatureMatching.use_gpu arg (=1)
+  --FeatureMatching.gpu_index arg (=-1)
+  --FeatureMatching.guided_matching arg (=0)
+  --FeatureMatching.skip_geometric_verification arg (=0)
+  --FeatureMatching.rig_verification arg (=0)
+  --FeatureMatching.skip_image_pairs_in_same_frame arg (=0)
+  --FeatureMatching.max_num_matches arg (=32768)
+  --SiftMatching.max_ratio arg (=0.8)
+  --SiftMatching.max_distance arg (=0.7)
+  --SiftMatching.cross_check arg (=1)
+  --SiftMatching.cpu_brute_force_matcher arg (=0)
+  --SiftMatching.lightglue_min_score arg (=0.1)
+  --SiftMatching.lightglue_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/sift-lightglue.onnx;sift-lightglue.onnx;e0500228472b43f92b3d36881a09b3310d3b058b56187b246cc7b9ab6429096e)
+  --AlikedMatching.brute_force_min_cossim arg (=0.85)
+  --AlikedMatching.brute_force_max_ratio arg (=1)
+  --AlikedMatching.brute_force_cross_check arg (=1)
+  --AlikedMatching.bruteforce_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/bruteforce-matcher.onnx;bruteforce-matcher.onnx;3c1282f96d83f5ffc861a873298d08bbe5219f59af59223f5ceab5c41a182a47)
+  --AlikedMatching.lightglue_min_score arg (=0.1)
+  --AlikedMatching.lightglue_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/aliked-lightglue.onnx;aliked-lightglue.onnx;b9a5de7204648b18a8cf5dcac819f9d30de1a5961ef03756803c8b86c2dceb8d)
+  --LomaMatching.min_score arg (=0.1)
+  --LomaMatching.use_bf16 arg (=0)
+  --LomaMatching.b_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_B.onnx;loma_matcher_B.onnx;ba5a2773b29cace19f1240e14e5a080cca3eaf9f69a7adb829a1d470557001c7)
+  --LomaMatching.b_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_B_bf16.onnx;loma_matcher_B_bf16.onnx;e61751cdbac6f305efa0d5b2ddc8f8c8e095b1b7196bfac3ed8d4e29b007f625)
+  --LomaMatching.b128_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_B128.onnx;loma_matcher_B128.onnx;e71ad490d13713374433a7ef99a7b4f4877d09338e40f347b7e64cc90150ee16)
+  --LomaMatching.b128_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_B128_bf16.onnx;loma_matcher_B128_bf16.onnx;7dec0563c0955400a7bef18ba0c62a70772c9c5c3bf2734372c32de5f1876c32)
+  --LomaMatching.r_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_R.onnx;loma_matcher_R.onnx;6c55247068568861d983b6005d9c401a4c62b8f8ea75d1a6925f13b0211407b5)
+  --LomaMatching.r_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_R_bf16.onnx;loma_matcher_R_bf16.onnx;172d214a91e5c12126acc7c7c66804c22ec47b9a8fc572b10ba9711714386e43)
+  --LomaMatching.l_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_L.onnx;loma_matcher_L.onnx;918da5427f37c3d9e05264a58a4d05729f87d459c3d5d69add7ce72eeacea66d)
+  --LomaMatching.l_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_L_bf16.onnx;loma_matcher_L_bf16.onnx;bab859300bbec88af30705021356f526a374d48ac7917b135d979686ade0ed23)
+  --LomaMatching.g_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_G.onnx;loma_matcher_G.onnx;62134cde779ed1031982c13c2c1952ed14856d715e97072364821a91f6276cf9)
+  --LomaMatching.g_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_G_bf16.onnx;loma_matcher_G_bf16.onnx;2d21420e1e0e3bcd085cd9a7d33be1f990e820d6b13ffbbddc73d9d04713b6c6)
+  --LomaMatching.brute_force_min_cossim arg (=0.85)
+  --LomaMatching.brute_force_max_ratio arg (=1)
+  --LomaMatching.brute_force_cross_check arg (=1)
+  --LomaMatching.brute_force_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/bruteforce-matcher.onnx;bruteforce-matcher.onnx;3c1282f96d83f5ffc861a873298d08bbe5219f59af59223f5ceab5c41a182a47)
+  --TwoViewGeometry.min_num_inliers arg (=15)
+  --TwoViewGeometry.multiple_models arg (=0)
+  --TwoViewGeometry.compute_relative_pose arg (=0)
+  --TwoViewGeometry.detect_watermark arg (=1)
+  --TwoViewGeometry.multiple_ignore_watermark arg (=1)
+  --TwoViewGeometry.watermark_detection_max_error arg (=4)
+  --TwoViewGeometry.filter_stationary_matches arg (=0)
+  --TwoViewGeometry.stationary_matches_max_error arg (=4)
+  --TwoViewGeometry.use_degensac arg (=0)
+  --TwoViewGeometry.use_sampson_refinement arg (=1)
+  --TwoViewGeometry.max_error arg (=4)
+  --TwoViewGeometry.confidence arg (=0.999)
+  --TwoViewGeometry.max_num_trials arg (=10000)
+  --TwoViewGeometry.min_inlier_ratio arg (=0)
+  --TwoViewGeometry.random_seed arg (=-1)
+  --ExhaustiveMatching.block_size arg (=50)
+
+
+======================================================================
+STAGE: 2. Feature Matching (Exhaustive)
+COMMAND: C:\colmap\colmap.bat exhaustive_matcher --database_path output/q4\database.db --FeatureMatching.use_gpu 0
+======================================================================
+I20261107 01:20:50.393961 12436 feature_matching.cc:196] === Feature matching & geometric verification ===
+I20261107 01:20:50.396134  1460 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:20:50.396148  4088 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:20:50.396135 12652 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:20:50.396507 15408 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:20:50.397142 11836 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:20:50.397294   608 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:20:50.397948 14508 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:20:50.399452 13552 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:20:50.400011 12436 pairing.cc:181] Generating exhaustive image pairs...
+I20261107 01:20:50.400071 12436 pairing.cc:214] Processing block [1/1, 1/1]
+I20261107 01:20:50.401470 12436 feature_matching.cc:218] in 0.001s
+I20261107 01:20:50.401567 12436 timer.cc:90] Elapsed time: 0.000 [minutes]
+
+
+======================================================================
+STAGE: 3. Sparse Reconstruction & Camera Pose Estimation
+COMMAND: C:\colmap\colmap.bat mapper --database_path output/q4\database.db --image_path input/colmap_images --output_path output/q4\sparse
+======================================================================
+I20261107 01:20:50.559981  9956 incremental_pipeline.cc:353] Loading database
+I20261107 01:20:50.561320  9956 database_cache.cc:82] Loading rigs...
+I20261107 01:20:50.561416  9956 database_cache.cc:92]  1 in 0.000s
+I20261107 01:20:50.561450  9956 database_cache.cc:100] Loading cameras...
+I20261107 01:20:50.561495  9956 database_cache.cc:118]  1 in 0.000s
+I20261107 01:20:50.561516  9956 database_cache.cc:126] Loading frames...
+I20261107 01:20:50.561645  9956 database_cache.cc:136]  8 in 0.000s
+I20261107 01:20:50.561674  9956 database_cache.cc:144] Loading matches...
+I20261107 01:20:50.561922  9956 database_cache.cc:163]  28 in 0.000s
+I20261107 01:20:50.561945  9956 database_cache.cc:171] Loading images...
+I20261107 01:20:50.563400  9956 database_cache.cc:268]  8 in 0.001s (connected 8, loaded 8)
+I20261107 01:20:50.563480  9956 database_cache.cc:282] Loading pose priors...
+I20261107 01:20:50.563542  9956 database_cache.cc:290]  0 in 0.000s
+I20261107 01:20:50.563572  9956 database_cache.cc:298] Building correspondence graph...
+I20261107 01:20:50.566542  9956 database_cache.cc:327]  in 0.003s (ignored 0)
+I20261107 01:20:50.566632  9956 timer.cc:90] Elapsed time: 0.000 [minutes]
+I20261107 01:20:50.567033  9956 incremental_pipeline.cc:465] Finding good initial image pair
+I20261107 01:20:50.620248  9956 incremental_pipeline.cc:492] Registering initial image pair #8 and #1
+I20261107 01:20:50.623398  9956 incremental_pipeline.cc:510] Global bundle adjustment
+I20261107 01:20:50.711271  9956 incremental_pipeline.cc:620] Registering image #3 (num_reg_frames=2)
+I20261107 01:20:50.711341  9956 incremental_pipeline.cc:623] => Image sees 206 / 907 points
+I20261107 01:20:50.776198  9956 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:20:50.787897  9956 incremental_pipeline.cc:620] Registering image #5 (num_reg_frames=3)
+I20261107 01:20:50.787952  9956 incremental_pipeline.cc:623] => Image sees 354 / 803 points
+I20261107 01:20:50.818897  9956 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:20:50.893880  9956 incremental_pipeline.cc:620] Registering image #2 (num_reg_frames=4)
+I20261107 01:20:50.893943  9956 incremental_pipeline.cc:623] => Image sees 437 / 739 points
+I20261107 01:20:50.932950  9956 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:20:50.983702  9956 incremental_pipeline.cc:620] Registering image #4 (num_reg_frames=5)
+I20261107 01:20:50.983752  9956 incremental_pipeline.cc:623] => Image sees 494 / 896 points
+I20261107 01:20:51.033063  9956 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:20:51.076020  9956 incremental_pipeline.cc:620] Registering image #6 (num_reg_frames=6)
+I20261107 01:20:51.076080  9956 incremental_pipeline.cc:623] => Image sees 444 / 732 points
+I20261107 01:20:51.121196  9956 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:20:51.172019  9956 incremental_pipeline.cc:620] Registering image #7 (num_reg_frames=7)
+I20261107 01:20:51.172068  9956 incremental_pipeline.cc:623] => Image sees 539 / 796 points
+I20261107 01:20:51.219421  9956 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:20:51.287951  9956 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:20:51.304570  9956 incremental_pipeline.cc:826] Keeping successful reconstruction
+I20261107 01:20:51.315307  9956 timer.cc:90] Elapsed time: 0.012 [minutes]
+
+
+======================================================================
+STAGE: Export Sparse Point Cloud (.ply)
+COMMAND: C:\colmap\colmap.bat model_converter --input_path output/q4\sparse\0 --output_path output/q4\sparse_point_cloud.ply --output_type PLY
+======================================================================
+
+
+======================================================================
+STAGE: 4a. Image Undistortion for Dense MVS
+COMMAND: C:\colmap\colmap.bat image_undistorter --image_path input/colmap_images --input_path output/q4\sparse\0 --output_path output/q4\dense
+======================================================================
+I20261107 01:20:51.633970 13096 image.cc:376] === Reading reconstruction ===
+I20261107 01:20:51.639751 13096 image.cc:379] => Reconstruction with 8 images and 988 points
+I20261107 01:20:51.639865 13096 undistorters.cc:166] === Image undistortion ===
+I20261107 01:20:51.640742 13096 undistorters.cc:208] Undistorting image [1/8]
+I20261107 01:20:51.641315  9420 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_01.jpg"
+I20261107 01:20:51.641544  1668 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_04.jpg"
+I20261107 01:20:51.641957  1232 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_03.jpg"
+I20261107 01:20:51.642664  9420 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_05.jpg"
+I20261107 01:20:51.642736  9616 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_02.jpg"
+I20261107 01:20:51.642922  1232 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_08.jpg"
+I20261107 01:20:51.643402 13916 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_07.jpg"
+I20261107 01:20:51.643684  1668 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_06.jpg"
+
+[Q4] ERROR: Stage '4a. Image Undistortion for Dense MVS' failed with exit code 3221226505.
+
+
+======================================================================
+STAGE: 5. Surface Meshing (Poisson)
+COMMAND: C:\colmap\colmap.bat poisson_mesher --input_path output/q4\sparse_point_cloud.ply --output_path output/q4\reconstructed_mesh.ply
+======================================================================
+W20261107 01:20:54.101679  1728 poisson_meshing.cc:162] PoissonRecon failed with exception: [EXCEPTION] ..\src\thirdparty\PoissonRecon\PoissonRecon.cpp (Line 656)
+            RunPoissonRecon
+            Ply file does not contain normals
+
+[Q4] ERROR: Stage '5. Surface Meshing (Poisson)' failed with exit code 3221226505.
+
+
+======================================================================
+STAGE: 5 (Fallback). Surface Meshing (Delaunay sparse)
+COMMAND: C:\colmap\colmap.bat delaunay_mesher --input_path output/q4\sparse\0 --input_type sparse --output_path output/q4\reconstructed_mesh.ply
+======================================================================
+I20261107 01:20:56.682774 16156 delaunay_meshing.cc:632] Triangulating points...
+I20261107 01:20:56.688599 16156 delaunay_meshing.cc:330] Triangulation has 696 using 988 points.
+I20261107 01:20:56.688658 16156 delaunay_meshing.cc:637] Initializing ray tracer...
+I20261107 01:20:56.690236 16156 delaunay_meshing.cc:646] Initializing graph optimization...
+I20261107 01:20:56.690929 16156 delaunay_meshing.cc:791] Integrating image [1/8]
+I20261107 01:20:56.702878 16156 delaunay_meshing.cc:817]  in 0.012s
+I20261107 01:20:56.703040 16156 delaunay_meshing.cc:791] Integrating image [2/8]
+I20261107 01:20:56.703213 16156 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:20:56.703331 16156 delaunay_meshing.cc:791] Integrating image [3/8]
+I20261107 01:20:56.703403 16156 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:20:56.703514 16156 delaunay_meshing.cc:791] Integrating image [4/8]
+I20261107 01:20:56.704444 16156 delaunay_meshing.cc:817]  in 0.001s
+I20261107 01:20:56.704608 16156 delaunay_meshing.cc:791] Integrating image [5/8]
+I20261107 01:20:56.704965 16156 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:20:56.705118 16156 delaunay_meshing.cc:791] Integrating image [6/8]
+I20261107 01:20:56.705232 16156 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:20:56.705361 16156 delaunay_meshing.cc:791] Integrating image [7/8]
+I20261107 01:20:56.705463 16156 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:20:56.705585 16156 delaunay_meshing.cc:791] Integrating image [8/8]
+I20261107 01:20:56.706906 16156 delaunay_meshing.cc:817]  in 0.001s
+I20261107 01:20:56.707018 16156 delaunay_meshing.cc:822] Setting up optimization...
+I20261107 01:20:56.711904 16156 delaunay_meshing.cc:870] Running graph-cut optimization...
+I20261107 01:20:56.713720 16156 delaunay_meshing.cc:873] Extracting surface as min-cut...
+I20261107 01:20:56.714122 16156 delaunay_meshing.cc:920] Creating surface mesh model...
+I20261107 01:20:56.716639 16156 delaunay_meshing.cc:971] Writing surface mesh...
+I20261107 01:20:56.717512 16156 timer.cc:86] Elapsed time: 0.03962 [seconds]
+
+
+======================================================================
+STAGE: COLMAP Version & Capability Check
+COMMAND: C:\colmap\colmap.bat -h
+======================================================================
+COLMAP 4.2.1 (Commit bd1fcf6 on 2026-09-29 without GPU support, boost hash maps)
+Usage:
+  colmap [command] [options]
+Documentation:
+  https://colmap.github.io/
+Example usage:
+  colmap help [ -h, --help ]
+  colmap gui
+  colmap gui -h [ --help ]
+  colmap automatic_reconstructor -h [ --help ]
+  colmap automatic_reconstructor --image_path IMAGES --workspace_path WORKSPACE
+  colmap feature_extractor --image_path IMAGES --database_path DATABASE
+  colmap exhaustive_matcher --database_path DATABASE
+  colmap mapper --image_path IMAGES --database_path DATABASE --output_path MODEL
+  ...
+Available commands:
+  help
+  version
+  gui
+  automatic_reconstructor
+  bundle_adjuster
+  color_extractor
+  database_cleaner
+  database_creator
+  database_merger
+  advancing_front_mesher
+  delaunay_mesher
+  exhaustive_matcher
+  feature_extractor
+  feature_importer
+  geometric_verifier
+  global_mapper
+  guided_geometric_verifier
+  hierarchical_mapper
+  image_deleter
+  image_filterer
+  image_rectifier
+  image_registrator
+  image_undistorter
+  image_undistorter_standalone
+  mapper
+  matches_importer
+  mesh_simplifier
+  mesh_texturer
+  model_aligner
+  model_analyzer
+  model_clusterer
+  model_comparer
+  model_converter
+  model_cropper
+  model_merger
+  model_orientation_aligner
+  model_splitter
+  model_transformer
+  patch_match_stereo
+  point_filtering
+  point_triangulator
+  pose_prior_mapper
+  poisson_mesher
+  project_generator
+  rig_configurator
+  rotation_averager
+  sequential_matcher
+  spatial_matcher
+  stereo_fusion
+  transitive_matcher
+  view_graph_calibrator
+  vocab_tree_builder
+  vocab_tree_matcher
+  vocab_tree_retriever
+
+
+
+======================================================================
+STAGE: Inspect feature_extractor Options
+COMMAND: C:\colmap\colmap.bat feature_extractor -h
+======================================================================
+I20261107 01:21:54.084217  7324 option_manager.cc:1319] COLMAP 4.2.1 (Commit bd1fcf6 on 2026-09-29 without GPU support, boost hash maps)
+I20261107 01:21:54.085501  7324 option_manager.cc:1321] Options can either be specified via command-line or by defining them in a .ini project file passed to `--project_path`.
+  -h [ --help ] 
+  --project_path arg
+  --default_random_seed arg (=0)
+  --log_target arg (=stderr_and_file)   {stderr, stdout, file, stderr_and_file}
+  --log_path arg
+  --log_level arg (=0)
+  --log_severity arg (=0)               0:INFO, 1:WARNING, 2:ERROR, 3:FATAL
+  --log_color arg (=1)
+  --database_path arg
+  --image_path arg
+  --camera_mode arg (=-1)
+  --image_list_path arg
+  --descriptor_normalization arg (=l1_root)
+                                        {'l1_root', 'l2'}
+  --ImageReader.mask_path arg
+  --ImageReader.camera_model arg (=SIMPLE_RADIAL)
+  --ImageReader.single_camera arg (=0)
+  --ImageReader.single_camera_per_folder arg (=0)
+  --ImageReader.single_camera_per_image arg (=0)
+  --ImageReader.existing_camera_id arg (=-1)
+  --ImageReader.camera_params arg
+  --ImageReader.default_focal_length_factor arg (=1.2)
+  --ImageReader.camera_mask_path arg
+  --FeatureExtraction.type arg (=SIFT)
+  --FeatureExtraction.num_threads arg (=-1)
+  --FeatureExtraction.use_gpu arg (=1)
+  --FeatureExtraction.gpu_index arg (=-1)
+  --FeatureExtraction.max_image_size arg (=-1)
+  --SiftExtraction.max_num_features arg (=8192)
+  --SiftExtraction.first_octave arg (=-1)
+  --SiftExtraction.num_octaves arg (=4)
+  --SiftExtraction.octave_resolution arg (=3)
+  --SiftExtraction.peak_threshold arg (=0.00667)
+  --SiftExtraction.edge_threshold arg (=10)
+  --SiftExtraction.estimate_affine_shape arg (=0)
+  --SiftExtraction.max_num_orientations arg (=2)
+  --SiftExtraction.upright arg (=0)
+  --SiftExtraction.domain_size_pooling arg (=0)
+  --SiftExtraction.dsp_min_scale arg (=0.167)
+  --SiftExtraction.dsp_max_scale arg (=3)
+  --SiftExtraction.dsp_num_scales arg (=10)
+  --AlikedExtraction.max_num_features arg (=2048)
+  --AlikedExtraction.min_score arg (=0.2)
+  --AlikedExtraction.n16rot_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/aliked-n16rot.onnx;aliked-n16rot.onnx;39c423d0a6f03d39ec89d3d1d61853765c2fb6a8b8381376c703e5758778a547)
+  --AlikedExtraction.n32_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/aliked-n32.onnx;aliked-n32.onnx;a077728a02d2de1a775c66df6de8cfeb7c6b51ca57572c64c680131c988c8b3c)
+  --LomaExtraction.max_num_features arg (=2048)
+  --LomaExtraction.min_score arg (=0)
+  --LomaExtraction.use_bf16 arg (=0)
+  --LomaExtraction.use_fast_resize arg (=0)
+  --LomaExtraction.detector_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_detector.onnx;loma_detector.onnx;b6af99c5e730034ac9b675d1ebe05d0679af4569a3c26f10a6a50f91e02dc512)
+  --LomaExtraction.descriptor_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_descriptor_dedode_g.onnx;loma_descriptor_dedode_g.onnx;5a7b9eaf7425d4513c5d7feae86080bae7ed3aceae7fb1b9f059d0752e2ad564)
+  --LomaExtraction.descriptor_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_descriptor_dedode_g_bf16.onnx;loma_descriptor_dedode_g_bf16.onnx;679b3ead5385b2bf0424548ed027edd48f96eb8b7cddcb42344e899cf0d97e7b)
+  --LomaExtraction.descriptor_b128_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_descriptor_dedode_b.onnx;loma_descriptor_dedode_b.onnx;82660a364299013618fe649092ebc4f617559f6a77e1ab5a3412be62a47ddc2d)
+
+
+======================================================================
+STAGE: 1. Feature Extraction (SIFT)
+COMMAND: C:\colmap\colmap.bat feature_extractor --database_path output/q4\database.db --image_path input/colmap_images --ImageReader.camera_model PINHOLE --ImageReader.single_camera 1 --FeatureExtraction.use_gpu 0
+======================================================================
+W20261107 01:21:54.232207  3448 feature_extraction.cc:445] Your current options use the maximum number of threads on the machine to extract features. Extracting SIFT features on the CPU can consume a lot of RAM per thread for large images. Consider reducing the maximum image size and/or the first octave or manually limit the number of extraction threads. Ignore this warning, if your machine has sufficient memory for the current settings.
+I20261107 01:21:54.234137 14476 feature_extraction.cc:498] === Feature extraction ===
+I20261107 01:21:54.235078 13528 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:21:54.235314 14660 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:21:54.235476   268 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:21:54.235568  8016 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:21:54.235774  8464 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:21:54.235867 11984 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:21:54.235979 13748 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:21:54.236066 15852 sift.cc:764] Creating SIFT CPU feature extractor
+I20261107 01:21:55.664255 12640 feature_extraction.cc:270] Processed file [1/8]
+I20261107 01:21:55.664371 12640 feature_extraction.cc:273]   Name:            frame_02.jpg
+I20261107 01:21:55.664397 12640 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:21:55.664417 12640 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:21:55.664438 12640 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:21:55.664481 12640 feature_extraction.cc:294]   Features:        2020 (SIFT)
+I20261107 01:21:55.668955 12640 feature_extraction.cc:270] Processed file [2/8]
+I20261107 01:21:55.669043 12640 feature_extraction.cc:273]   Name:            frame_04.jpg
+I20261107 01:21:55.669076 12640 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:21:55.669102 12640 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:21:55.669127 12640 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:21:55.669171 12640 feature_extraction.cc:294]   Features:        2056 (SIFT)
+I20261107 01:21:55.712291 12640 feature_extraction.cc:270] Processed file [3/8]
+I20261107 01:21:55.712388 12640 feature_extraction.cc:273]   Name:            frame_07.jpg
+I20261107 01:21:55.712434 12640 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:21:55.712461 12640 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:21:55.712495 12640 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:21:55.712527 12640 feature_extraction.cc:294]   Features:        2000 (SIFT)
+I20261107 01:21:55.776114 12640 feature_extraction.cc:270] Processed file [4/8]
+I20261107 01:21:55.776227 12640 feature_extraction.cc:273]   Name:            frame_06.jpg
+I20261107 01:21:55.776259 12640 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:21:55.776279 12640 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:21:55.776299 12640 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:21:55.776333 12640 feature_extraction.cc:294]   Features:        2086 (SIFT)
+I20261107 01:21:55.827370 12640 feature_extraction.cc:270] Processed file [5/8]
+I20261107 01:21:55.827466 12640 feature_extraction.cc:273]   Name:            frame_01.jpg
+I20261107 01:21:55.827500 12640 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:21:55.827524 12640 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:21:55.827547 12640 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:21:55.827576 12640 feature_extraction.cc:294]   Features:        2022 (SIFT)
+I20261107 01:21:55.919309 12640 feature_extraction.cc:270] Processed file [6/8]
+I20261107 01:21:55.919430 12640 feature_extraction.cc:273]   Name:            frame_03.jpg
+I20261107 01:21:55.919473 12640 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:21:55.919501 12640 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:21:55.919525 12640 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:21:55.919558 12640 feature_extraction.cc:294]   Features:        2146 (SIFT)
+I20261107 01:21:55.948799 12640 feature_extraction.cc:270] Processed file [7/8]
+I20261107 01:21:55.948933 12640 feature_extraction.cc:273]   Name:            frame_08.jpg
+I20261107 01:21:55.948961 12640 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:21:55.949243 12640 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:21:55.949283 12640 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:21:55.949321 12640 feature_extraction.cc:294]   Features:        2062 (SIFT)
+I20261107 01:21:55.952316 12640 feature_extraction.cc:270] Processed file [8/8]
+I20261107 01:21:55.952404 12640 feature_extraction.cc:273]   Name:            frame_05.jpg
+I20261107 01:21:55.952434 12640 feature_extraction.cc:282]   Dimensions:      800 x 600
+I20261107 01:21:55.952454 12640 feature_extraction.cc:285]   Camera:          #1 - PINHOLE
+I20261107 01:21:55.952476 12640 feature_extraction.cc:289]   Focal Length:    960.00px
+I20261107 01:21:55.952510 12640 feature_extraction.cc:294]   Features:        2002 (SIFT)
+I20261107 01:21:55.973404 14476 timer.cc:90] Elapsed time: 0.029 [minutes]
+
+
+======================================================================
+STAGE: Inspect exhaustive_matcher Options
+COMMAND: C:\colmap\colmap.bat exhaustive_matcher -h
+======================================================================
+I20261107 01:21:56.150400 15268 option_manager.cc:1319] COLMAP 4.2.1 (Commit bd1fcf6 on 2026-09-29 without GPU support, boost hash maps)
+I20261107 01:21:56.151618 15268 option_manager.cc:1321] Options can either be specified via command-line or by defining them in a .ini project file passed to `--project_path`.
+  -h [ --help ] 
+  --project_path arg
+  --default_random_seed arg (=0)
+  --log_target arg (=stderr_and_file)   {stderr, stdout, file, stderr_and_file}
+  --log_path arg
+  --log_level arg (=0)
+  --log_severity arg (=0)               0:INFO, 1:WARNING, 2:ERROR, 3:FATAL
+  --log_color arg (=1)
+  --database_path arg
+  --FeatureMatching.type arg (=SIFT_BRUTEFORCE)
+  --FeatureMatching.num_threads arg (=-1)
+  --FeatureMatching.use_gpu arg (=1)
+  --FeatureMatching.gpu_index arg (=-1)
+  --FeatureMatching.guided_matching arg (=0)
+  --FeatureMatching.skip_geometric_verification arg (=0)
+  --FeatureMatching.rig_verification arg (=0)
+  --FeatureMatching.skip_image_pairs_in_same_frame arg (=0)
+  --FeatureMatching.max_num_matches arg (=32768)
+  --SiftMatching.max_ratio arg (=0.8)
+  --SiftMatching.max_distance arg (=0.7)
+  --SiftMatching.cross_check arg (=1)
+  --SiftMatching.cpu_brute_force_matcher arg (=0)
+  --SiftMatching.lightglue_min_score arg (=0.1)
+  --SiftMatching.lightglue_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/sift-lightglue.onnx;sift-lightglue.onnx;e0500228472b43f92b3d36881a09b3310d3b058b56187b246cc7b9ab6429096e)
+  --AlikedMatching.brute_force_min_cossim arg (=0.85)
+  --AlikedMatching.brute_force_max_ratio arg (=1)
+  --AlikedMatching.brute_force_cross_check arg (=1)
+  --AlikedMatching.bruteforce_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/bruteforce-matcher.onnx;bruteforce-matcher.onnx;3c1282f96d83f5ffc861a873298d08bbe5219f59af59223f5ceab5c41a182a47)
+  --AlikedMatching.lightglue_min_score arg (=0.1)
+  --AlikedMatching.lightglue_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/aliked-lightglue.onnx;aliked-lightglue.onnx;b9a5de7204648b18a8cf5dcac819f9d30de1a5961ef03756803c8b86c2dceb8d)
+  --LomaMatching.min_score arg (=0.1)
+  --LomaMatching.use_bf16 arg (=0)
+  --LomaMatching.b_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_B.onnx;loma_matcher_B.onnx;ba5a2773b29cace19f1240e14e5a080cca3eaf9f69a7adb829a1d470557001c7)
+  --LomaMatching.b_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_B_bf16.onnx;loma_matcher_B_bf16.onnx;e61751cdbac6f305efa0d5b2ddc8f8c8e095b1b7196bfac3ed8d4e29b007f625)
+  --LomaMatching.b128_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_B128.onnx;loma_matcher_B128.onnx;e71ad490d13713374433a7ef99a7b4f4877d09338e40f347b7e64cc90150ee16)
+  --LomaMatching.b128_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_B128_bf16.onnx;loma_matcher_B128_bf16.onnx;7dec0563c0955400a7bef18ba0c62a70772c9c5c3bf2734372c32de5f1876c32)
+  --LomaMatching.r_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_R.onnx;loma_matcher_R.onnx;6c55247068568861d983b6005d9c401a4c62b8f8ea75d1a6925f13b0211407b5)
+  --LomaMatching.r_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_R_bf16.onnx;loma_matcher_R_bf16.onnx;172d214a91e5c12126acc7c7c66804c22ec47b9a8fc572b10ba9711714386e43)
+  --LomaMatching.l_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_L.onnx;loma_matcher_L.onnx;918da5427f37c3d9e05264a58a4d05729f87d459c3d5d69add7ce72eeacea66d)
+  --LomaMatching.l_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_L_bf16.onnx;loma_matcher_L_bf16.onnx;bab859300bbec88af30705021356f526a374d48ac7917b135d979686ade0ed23)
+  --LomaMatching.g_model_path arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_G.onnx;loma_matcher_G.onnx;62134cde779ed1031982c13c2c1952ed14856d715e97072364821a91f6276cf9)
+  --LomaMatching.g_model_path_bf16 arg (=https://github.com/davnords/storage/releases/download/loma/loma_matcher_G_bf16.onnx;loma_matcher_G_bf16.onnx;2d21420e1e0e3bcd085cd9a7d33be1f990e820d6b13ffbbddc73d9d04713b6c6)
+  --LomaMatching.brute_force_min_cossim arg (=0.85)
+  --LomaMatching.brute_force_max_ratio arg (=1)
+  --LomaMatching.brute_force_cross_check arg (=1)
+  --LomaMatching.brute_force_model_path arg (=https://github.com/colmap/colmap/releases/download/3.13.0/bruteforce-matcher.onnx;bruteforce-matcher.onnx;3c1282f96d83f5ffc861a873298d08bbe5219f59af59223f5ceab5c41a182a47)
+  --TwoViewGeometry.min_num_inliers arg (=15)
+  --TwoViewGeometry.multiple_models arg (=0)
+  --TwoViewGeometry.compute_relative_pose arg (=0)
+  --TwoViewGeometry.detect_watermark arg (=1)
+  --TwoViewGeometry.multiple_ignore_watermark arg (=1)
+  --TwoViewGeometry.watermark_detection_max_error arg (=4)
+  --TwoViewGeometry.filter_stationary_matches arg (=0)
+  --TwoViewGeometry.stationary_matches_max_error arg (=4)
+  --TwoViewGeometry.use_degensac arg (=0)
+  --TwoViewGeometry.use_sampson_refinement arg (=1)
+  --TwoViewGeometry.max_error arg (=4)
+  --TwoViewGeometry.confidence arg (=0.999)
+  --TwoViewGeometry.max_num_trials arg (=10000)
+  --TwoViewGeometry.min_inlier_ratio arg (=0)
+  --TwoViewGeometry.random_seed arg (=-1)
+  --ExhaustiveMatching.block_size arg (=50)
+
+
+======================================================================
+STAGE: 2. Feature Matching (Exhaustive)
+COMMAND: C:\colmap\colmap.bat exhaustive_matcher --database_path output/q4\database.db --FeatureMatching.use_gpu 0
+======================================================================
+I20261107 01:21:56.309038 14072 feature_matching.cc:196] === Feature matching & geometric verification ===
+I20261107 01:21:56.310870 15728 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:21:56.310870  7016 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:21:56.310876  3472 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:21:56.311056  4600 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:21:56.311124  9792 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:21:56.311220  1740 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:21:56.311293 15608 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:21:56.311453  7728 sift.cc:1685] Creating SIFT CPU feature matcher
+I20261107 01:21:56.311829 14072 pairing.cc:181] Generating exhaustive image pairs...
+I20261107 01:21:56.311872 14072 pairing.cc:214] Processing block [1/1, 1/1]
+I20261107 01:21:57.966584 14072 feature_matching.cc:218] in 1.655s
+I20261107 01:21:57.966654 14072 timer.cc:90] Elapsed time: 0.028 [minutes]
+
+
+======================================================================
+STAGE: 3. Sparse Reconstruction & Camera Pose Estimation
+COMMAND: C:\colmap\colmap.bat mapper --database_path output/q4\database.db --image_path input/colmap_images --output_path output/q4\sparse
+======================================================================
+I20261107 01:21:58.134681 12344 incremental_pipeline.cc:353] Loading database
+I20261107 01:21:58.135908 12344 database_cache.cc:82] Loading rigs...
+I20261107 01:21:58.135983 12344 database_cache.cc:92]  1 in 0.000s
+I20261107 01:21:58.136004 12344 database_cache.cc:100] Loading cameras...
+I20261107 01:21:58.136039 12344 database_cache.cc:118]  1 in 0.000s
+I20261107 01:21:58.136055 12344 database_cache.cc:126] Loading frames...
+I20261107 01:21:58.136147 12344 database_cache.cc:136]  8 in 0.000s
+I20261107 01:21:58.136179 12344 database_cache.cc:144] Loading matches...
+I20261107 01:21:58.136632 12344 database_cache.cc:163]  28 in 0.000s
+I20261107 01:21:58.136681 12344 database_cache.cc:171] Loading images...
+I20261107 01:21:58.138033 12344 database_cache.cc:268]  8 in 0.001s (connected 8, loaded 8)
+I20261107 01:21:58.138090 12344 database_cache.cc:282] Loading pose priors...
+I20261107 01:21:58.138123 12344 database_cache.cc:290]  0 in 0.000s
+I20261107 01:21:58.138140 12344 database_cache.cc:298] Building correspondence graph...
+I20261107 01:21:58.141414 12344 database_cache.cc:327]  in 0.003s (ignored 0)
+I20261107 01:21:58.141521 12344 timer.cc:90] Elapsed time: 0.000 [minutes]
+I20261107 01:21:58.142024 12344 incremental_pipeline.cc:465] Finding good initial image pair
+I20261107 01:21:58.196209 12344 incremental_pipeline.cc:492] Registering initial image pair #4 and #2
+I20261107 01:21:58.199368 12344 incremental_pipeline.cc:510] Global bundle adjustment
+I20261107 01:21:58.272224 12344 incremental_pipeline.cc:620] Registering image #6 (num_reg_frames=2)
+I20261107 01:21:58.272284 12344 incremental_pipeline.cc:623] => Image sees 206 / 907 points
+I20261107 01:21:58.310646 12344 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:21:58.405901 12344 incremental_pipeline.cc:620] Registering image #1 (num_reg_frames=3)
+I20261107 01:21:58.405985 12344 incremental_pipeline.cc:623] => Image sees 355 / 803 points
+I20261107 01:21:58.435273 12344 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:21:58.512543 12344 incremental_pipeline.cc:620] Registering image #5 (num_reg_frames=4)
+I20261107 01:21:58.512593 12344 incremental_pipeline.cc:623] => Image sees 437 / 739 points
+I20261107 01:21:58.552227 12344 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:21:58.614417 12344 incremental_pipeline.cc:620] Registering image #8 (num_reg_frames=5)
+I20261107 01:21:58.614467 12344 incremental_pipeline.cc:623] => Image sees 494 / 896 points
+I20261107 01:21:58.664893 12344 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:21:58.716244 12344 incremental_pipeline.cc:620] Registering image #7 (num_reg_frames=6)
+I20261107 01:21:58.716294 12344 incremental_pipeline.cc:623] => Image sees 445 / 732 points
+I20261107 01:21:58.763250 12344 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:21:58.827239 12344 incremental_pipeline.cc:620] Registering image #3 (num_reg_frames=7)
+I20261107 01:21:58.827287 12344 incremental_pipeline.cc:623] => Image sees 537 / 796 points
+I20261107 01:21:58.872625 12344 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:21:58.934660 12344 incremental_pipeline.cc:88] Retriangulation and Global bundle adjustment
+I20261107 01:21:58.952248 12344 incremental_pipeline.cc:826] Keeping successful reconstruction
+I20261107 01:21:58.962111 12344 timer.cc:90] Elapsed time: 0.014 [minutes]
+
+
+======================================================================
+STAGE: Export Sparse Point Cloud (.ply)
+COMMAND: C:\colmap\colmap.bat model_converter --input_path output/q4\sparse\0 --output_path output/q4\sparse_point_cloud.ply --output_type PLY
+======================================================================
+
+
+======================================================================
+STAGE: 4a. Image Undistortion for Dense MVS
+COMMAND: C:\colmap\colmap.bat image_undistorter --image_path input/colmap_images --input_path output/q4\sparse\0 --output_path output/q4\dense
+======================================================================
+I20261107 01:21:59.260884  1456 image.cc:376] === Reading reconstruction ===
+I20261107 01:21:59.266203  1456 image.cc:379] => Reconstruction with 8 images and 986 points
+I20261107 01:21:59.266269  1456 undistorters.cc:166] === Image undistortion ===
+I20261107 01:21:59.268511  1456 undistorters.cc:208] Undistorting image [1/8]
+I20261107 01:21:59.268644  3036 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_02.jpg"
+I20261107 01:21:59.268777 13628 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_04.jpg"
+I20261107 01:21:59.268864 15548 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_07.jpg"
+I20261107 01:21:59.268957 12388 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_06.jpg"
+I20261107 01:21:59.269035 16172 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_01.jpg"
+I20261107 01:21:59.269321 13348 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_03.jpg"
+I20261107 01:21:59.269895 10720 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_08.jpg"
+I20261107 01:21:59.270725 12348 undistorters.cc:264] Copying already undistorted image to location: "output/q4\\dense\\images\\frame_05.jpg"
+I20261107 01:21:59.274031  1456 undistorters.cc:208] Undistorting image [2/8]
+I20261107 01:21:59.274122  1456 undistorters.cc:208] Undistorting image [3/8]
+I20261107 01:21:59.274997  1456 undistorters.cc:208] Undistorting image [4/8]
+I20261107 01:21:59.275056  1456 undistorters.cc:208] Undistorting image [5/8]
+I20261107 01:21:59.275083  1456 undistorters.cc:208] Undistorting image [6/8]
+I20261107 01:21:59.275105  1456 undistorters.cc:208] Undistorting image [7/8]
+I20261107 01:21:59.275125  1456 undistorters.cc:208] Undistorting image [8/8]
+I20261107 01:21:59.275146  1456 undistorters.cc:222] Writing reconstruction...
+I20261107 01:21:59.289547  1456 undistorters.cc:227] Writing configuration...
+I20261107 01:21:59.290795  1456 undistorters.cc:231] Writing scripts...
+I20261107 01:21:59.291918  1456 timer.cc:90] Elapsed time: 0.000 [minutes]
+
+
+======================================================================
+STAGE: 4b. PatchMatch Stereo Depth Estimation
+COMMAND: C:\colmap\colmap.bat patch_match_stereo --workspace_path output/q4\dense --PatchMatchStereo.geom_consistency true
+======================================================================
+
+[Q4] ERROR: Stage '4b. PatchMatch Stereo Depth Estimation' failed with exit code 3221226505.
+
+
+======================================================================
+STAGE: 5. Surface Meshing (Poisson)
+COMMAND: C:\colmap\colmap.bat poisson_mesher --input_path output/q4\sparse_point_cloud.ply --output_path output/q4\reconstructed_mesh.ply
+======================================================================
+W20261107 01:22:01.879456  1284 poisson_meshing.cc:162] PoissonRecon failed with exception: [EXCEPTION] ..\src\thirdparty\PoissonRecon\PoissonRecon.cpp (Line 656)
+            RunPoissonRecon
+            Ply file does not contain normals
+
+[Q4] ERROR: Stage '5. Surface Meshing (Poisson)' failed with exit code 3221226505.
+
+
+======================================================================
+STAGE: 5 (Fallback). Surface Meshing (Delaunay sparse)
+COMMAND: C:\colmap\colmap.bat delaunay_mesher --input_path output/q4\sparse\0 --input_type sparse --output_path output/q4\reconstructed_mesh.ply
+======================================================================
+I20261107 01:22:04.240069 11700 delaunay_meshing.cc:632] Triangulating points...
+I20261107 01:22:04.246645 11700 delaunay_meshing.cc:330] Triangulation has 693 using 986 points.
+I20261107 01:22:04.246735 11700 delaunay_meshing.cc:637] Initializing ray tracer...
+I20261107 01:22:04.248353 11700 delaunay_meshing.cc:646] Initializing graph optimization...
+I20261107 01:22:04.249150 11700 delaunay_meshing.cc:791] Integrating image [1/8]
+I20261107 01:22:04.263045 11700 delaunay_meshing.cc:817]  in 0.014s
+I20261107 01:22:04.263220 11700 delaunay_meshing.cc:791] Integrating image [2/8]
+I20261107 01:22:04.263328 11700 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:22:04.263455 11700 delaunay_meshing.cc:791] Integrating image [3/8]
+I20261107 01:22:04.263564 11700 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:22:04.264117 11700 delaunay_meshing.cc:791] Integrating image [4/8]
+I20261107 01:22:04.264369 11700 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:22:04.264515 11700 delaunay_meshing.cc:791] Integrating image [5/8]
+I20261107 01:22:04.265050 11700 delaunay_meshing.cc:817]  in 0.001s
+I20261107 01:22:04.265282 11700 delaunay_meshing.cc:791] Integrating image [6/8]
+I20261107 01:22:04.266785 11700 delaunay_meshing.cc:817]  in 0.002s
+I20261107 01:22:04.266965 11700 delaunay_meshing.cc:791] Integrating image [7/8]
+I20261107 01:22:04.267189 11700 delaunay_meshing.cc:817]  in 0.000s
+I20261107 01:22:04.267275 11700 delaunay_meshing.cc:791] Integrating image [8/8]
+I20261107 01:22:04.269300 11700 delaunay_meshing.cc:817]  in 0.002s
+I20261107 01:22:04.269410 11700 delaunay_meshing.cc:822] Setting up optimization...
+I20261107 01:22:04.274967 11700 delaunay_meshing.cc:870] Running graph-cut optimization...
+I20261107 01:22:04.276668 11700 delaunay_meshing.cc:873] Extracting surface as min-cut...
+I20261107 01:22:04.277016 11700 delaunay_meshing.cc:920] Creating surface mesh model...
+I20261107 01:22:04.279035 11700 delaunay_meshing.cc:971] Writing surface mesh...
+I20261107 01:22:04.279865 11700 timer.cc:86] Elapsed time: 0.04436 [seconds]

@@ -1,0 +1,64 @@
+LAB 07 - QUESTION 1(c): HOMOGENEOUS COORDINATES IN COMPUTER VISION
+
+1. DEFINITION & FORMULATION
+---------------------------
+A 2D Euclidean Cartesian point is defined as:
+    P_cartesian = (x, y)
+
+In homogeneous (projective) coordinates, this point is represented as a 3D ray:
+    P_homo = [X, Y, W]^T  such that x = X / W and y = Y / W (for W != 0)
+
+Conventionally, finite Euclidean points use W = 1:
+    Original Point:       (x, y) = (4.0, 2.5)
+    Homogeneous Vector:   [x, y, 1]^T = [4.0, 2.5, 1.0]^T
+
+Any non-zero scalar multiple k * [x, y, 1]^T represents the exact same physical point in Cartesian space:
+    [14.0, 8.75, 3.5]^T ---> (4.0, 2.5)
+
+
+2. WHY IS THE EXTRA COORDINATE (W) USED IN COMPUTER VISION?
+------------------------------------------------------------
+(a) LINEAR REPRESENTATION OF TRANSLATION:
+    In standard 2D Cartesian coordinates, rotation and scaling are linear transformations:
+        x' = R * x
+    However, translation is an AFFINE operation requiring vector addition:
+        x' = x + t
+    This addition prevents translation from being combined directly with linear transformations into a single 2x2 matrix.
+    By augmenting the coordinate vector with an extra component (W=1), translation becomes a linear matrix multiplication:
+        [x']   [1  0  tx] [x]
+        [y'] = [0  1  ty] [y]
+        [ 1]   [0  0   1] [1]
+
+(b) UNIFIED TRANSFORMATION COMPOSITION:
+    In Computer Vision pipelines (e.g., camera calibration, robotics, SLAM), multiple operations (rotation, scaling,
+    shearing, translation, and projection) must be chained repeatedly.
+    With homogeneous coordinates, any sequence of transformations can be multiplied together into a single 3x3 matrix:
+        M = T * R * S
+    A single matrix-vector multiplication then transforms any point, dramatically boosting computational efficiency.
+
+(c) PERSPECTIVE PROJECTION & CAMERAS:
+    Pinhole cameras project 3D world points (X, Y, Z) onto a 2D image sensor (u, v) by dividing by depth Z:
+        u = f * (X / Z) + cx
+        v = f * (Y / Z) + cy
+    Division is non-linear in Euclidean space. In homogeneous coordinates, projection is represented linearly by a 3x4
+    camera projection matrix P:
+        [u*w, v*w, w]^T = P * [X, Y, Z, 1]^T
+    The division by depth (perspective foreshortening) occurs naturally during homogeneous normalization by W.
+
+(d) REPRESENTATION OF POINTS AT INFINITY:
+    Parallel lines in the real world (such as railway tracks) intersect at a vanishing point. In Euclidean space, this
+    intersection occurs at infinity and cannot be assigned finite coordinates.
+    In homogeneous coordinates, points at infinity are represented naturally when W = 0: [dx, dy, 0]^T, encoding the
+    direction of the line without causing a numerical singularity.
+
+
+3. NUMERICAL VERIFICATION
+-------------------------
+Initial Point:
+    P = (4.0, 2.5)
+Translation Vector:
+    (tx, ty) = (5.0, 3.0)
+Homogeneous Matrix Multiplication:
+    T @ P_homo = [9.0, 5.5, 1.0]^T
+Cartesian Extraction:
+    P_translated = (9.0, 5.5)

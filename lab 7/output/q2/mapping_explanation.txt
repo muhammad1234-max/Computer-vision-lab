@@ -1,0 +1,27 @@
+LAB 07 - QUESTION 2: PERSPECTIVE CORRECTION (UNWARPING)
+==============================================================
+SPECIFICATION VERIFICATION:
+"Modify the apply_perspective_transform function's inputs to perform an inverse transformation:
+ you'll take the tilted view as the source and map it back to a perfect rectangle as the destination."
+
+MAPPING VERIFICATION:
+- SOURCE POINTS (Tilted Perspective View):
+  Top-Left:     (220.0, 120.0)
+  Top-Right:    (680.0, 160.0)
+  Bottom-Right: (780.0, 560.0)
+  Bottom-Left:  (120.0, 500.0)
+
+- DESTINATION POINTS (Unwarped Perfect Rectangle):
+  Top-Left:     (0, 0)
+  Top-Right:    (661.0, 0)
+  Bottom-Right: (661.0, 411.0)
+  Bottom-Left:  (0, 411.0)
+
+- COMPUTED PERSPECTIVE MATRIX M (3x3):
+[[ 1.59468659e+00  4.19654367e-01 -4.01189574e+02]
+ [-1.48906829e-01  1.71242853e+00 -1.72731921e+02]
+ [-9.83125828e-05  1.26259027e-03  1.00000000e+00]]
+
+RESULTS:
+The slanted perspective has been rectified head-on with restored parallel boundaries
+and readable text alignment.

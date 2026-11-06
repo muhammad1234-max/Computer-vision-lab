@@ -1,0 +1,45 @@
+LAB 07 - QUESTION 1(d): BEHAVIOUR OF STRAIGHT LINES UNDER AFFINE TRANSFORMATION
+
+KEY OBSERVATION:
+================
+DO STRAIGHT LINES REMAIN STRAIGHT AFTER AN AFFINE TRANSFORMATION?
+--> YES. Straight lines STRICTLY remain straight lines after an affine transformation.
+
+MATHEMATICAL EXPLANATION:
+-------------------------
+1. PRESERVATION OF COLLINEARITY:
+   An affine transformation maps any 2D point x = [x, y]^T to x' via:
+       x' = A * x + t
+   where A is a non-singular 2x2 matrix and t is a 2D translation vector.
+
+   A straight line in parametric form is defined by:
+       L(lambda) = p0 + lambda * v
+   where p0 is a base point, v is the direction vector, and lambda is a real scalar.
+
+   Applying the affine transformation:
+       L'(lambda) = A * (p0 + lambda * v) + t
+                  = (A * p0 + t) + lambda * (A * v)
+                  = p0' + lambda * v'
+
+   Because L'(lambda) is a linear function of lambda with base point p0' = (A*p0 + t)
+   and constant direction vector v' = (A * v), the transformed set of points forms
+   another PERFECT STRAIGHT LINE.
+
+2. PRESERVATION OF PARALLELISM:
+   Two parallel lines share the same direction vector v:
+       L1: p1 + lambda * v
+       L2: p2 + lambda * v
+   After affine transformation:
+       L1': (A * p1 + t) + lambda * (A * v)
+       L2': (A * p2 + t) + lambda * (A * v)
+   Both transformed lines share the same transformed direction vector v' = A * v.
+   Therefore, lines that are parallel before transformation REMAIN PARALLEL after transformation.
+
+3. RATIOS OF DISTANCES ALONG A LINE:
+   The ratio of lengths of any two segments on a single straight line is preserved:
+       ||p_b - p_a|| / ||p_c - p_a|| = ||p_b' - p_a'|| / ||p_c' - p_a'||
+
+4. WHAT CHANGES:
+   While collinearity and parallelism are preserved:
+   - Angles between non-parallel intersecting lines can change (orthogonality is not preserved).
+   - Absolute lengths, areas, and aspect ratios can change due to scaling and shearing.
